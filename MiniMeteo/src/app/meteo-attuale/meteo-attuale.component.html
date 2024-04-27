@@ -1,0 +1,75 @@
+<div class="container text-center mt-5">
+    <div class="container text-center py-5 bg-dark text-light">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h1 class="display-4 mb-4"><strong>Ricerca della città</strong></h1>
+            <h2>Previsione del meteo in questo momento</h2>
+            <div class="input-group mt-3">
+              <input type="text" #newquery class="form-control" placeholder="Inserisci il nome della città">
+              <div class="input-group-append">
+                <button (click)="submit(newquery)" class="btn btn-light btn-outline-dark">Cerca</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+  <div *ngIf="results" class="container mt-5">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h3 class="card-title mb-0 text-light">Meteo di {{ results.name }} ({{ results.sys.country}})</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><strong>Condizioni meteo:</strong></td>
+                <td>{{ results.weather[0].description }}</td>
+              </tr>
+              <tr>
+                <td><strong>Temperatura:</strong></td>
+                <td>{{ results.main.temp }} °C</td>
+              </tr>
+              <tr>
+                <td><strong>Temperatura percepita:</strong></td>
+                <td>{{ results.main.feels_like }} °C</td>
+              </tr>
+              <tr>
+                <td><strong>Temperatura minima:</strong></td>
+                <td>{{ results.main.temp_min }} °C</td>
+              </tr>
+              <tr>
+                <td><strong>Temperatura massima:</strong></td>
+                <td>{{ results.main.temp_max }} °C</td>
+              </tr>
+              <tr>
+                <td><strong>Umidità:</strong></td>
+                <td>{{ results.main.humidity }} %</td>
+              </tr>
+              <tr>
+                <td><strong>Visibilità:</strong></td>
+                <td>{{ results.visibility }} metri</td>
+              </tr>
+              <tr>
+                <td><strong>Pioggia (ultima ora):</strong></td>
+                <td>{{ results.rain?.['1h'] || '0' }} mm</td>
+              </tr>
+              <tr>
+                <td><strong>Nuvolosità:</strong></td>
+                <td>{{ results.clouds.all }}%</td>
+              </tr>
+              <tr>
+                <td><strong>Velocità del vento:</strong></td>
+                <td>{{ results.wind.speed }} m/s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <img src="http://openweathermap.org/img/wn/{{ results.weather[0].icon }}@4x.png"
+             alt="Icona meteo"
+             class="img-fluid mt-3 w-25 mx-auto d-block">
+      </div>
+    </div>
+  </div>
